@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://unpkg.com/@clr/ui@0.12.5/clr-ui.min.css" />
+
+  <link rel="stylesheet" href="https://unpkg.com/clarity-icons/clarity-icons.min.css">
+
+  <!--CLARITY ICONS DEPENDENCY: CUSTOM ELEMENTS POLYFILL-->
+  <script src="https://unpkg.com/@webcomponents/custom-elements/custom-elements.min.js"></script>
+
+  <!--CLARITY ICONS API & CORE SHAPES SET-->
+  <script src="https://unpkg.com/clarity-icons/clarity-icons-lite.min.js"></script>
+
+  <!--ICON SETS-->
+  <script src="https://unpkg.com/clarity-icons/shapes/social-shapes.min.js"></script>
+  <script src="https://unpkg.com/clarity-icons/shapes/travel-shapes.min.js"></script>
+
+</head>
+<body>
+    <header class="header-6">
+        <div class="branding">
+            ...
+        </div>
+        <div class="header-nav">
+            <a routerLinkActive="active" routerLink="/videos" class="nav-link nav-text">Video Store</a> 
+            <a routerLinkActive="active" routerLink="/login" class="nav-link nav-text">Login</a> 
+        </div>
+        <form class="search">
+            <label for="search_input">
+              <input id="search_input" type="text" placeholder="Search for keywords...">
+            </label>
+          </form>
+        <div class="header-actions">
+            <a href="javascript://" class="nav-link nav-icon">
+                <clr-icon shape="cog"></clr-icon>
+            </a>
+        </div>
+    </header>
+  
+  <router-outlet></router-outlet>
+  
+</body>
+</html>
