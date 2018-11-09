@@ -7,6 +7,8 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { VideoSingleComponent } from './video-single/video-single.component';
 import { VideoDetailComponent } from './video-detail/video-detail.component';
 
+import { CookieService } from 'ngx-cookie-service';
+
 const appRoutes: Routes = [
   { path: '', redirectTo: 'videos', pathMatch: 'full' },
   { path: 'videos', component: VideoGridComponent },
@@ -30,7 +32,7 @@ const appRoutes: Routes = [
     BrowserModule
   ],
   exports: [RouterModule],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
