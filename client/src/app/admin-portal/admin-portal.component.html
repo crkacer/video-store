@@ -1,0 +1,27 @@
+
+<div class="main-container">
+  <div class="content-container">
+      <nav class="sidenav">
+          <section class="sidenav-content">
+              <section class="nav-group collapsible">
+                  <input id="tabexample1" type="checkbox">
+                  <label for="tabexample1">Videos</label>
+                  <ul class="nav-list">
+                      <li><a class="nav-link" routerLinkActive="active" routerLink="/portal/video-management">All Videos</a></li>
+                      <li><a class="nav-link" routerLinkActive="active" routerLink="/portal/video-create">Create</a></li>
+                  </ul>
+              </section>
+
+              <section class="nav-group collapsible">
+                <input id="tabexample2" type="checkbox">
+                <label for="tabexample2">User</label>
+                <ul class="nav-list">
+                    <li><a class="nav-link" routerLinkActive="active" routerLink="/portal/user-management">All Users</a></li>
+                </ul>
+            </section>
+
+          </section>
+      </nav>
+      <router-outlet></router-outlet>
+  </div>
+</div>
