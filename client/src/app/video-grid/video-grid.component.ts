@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Http} from '@angular/http';
+import {VideoService} from './video-grid.service';
+import { Video } from '../models/video';
 
 @Component({
   selector: 'video-grid',
@@ -8,9 +10,17 @@ import {Http} from '@angular/http';
 })
 export class VideoGridComponent implements OnInit {
 
-  constructor() {}
+  videos: Video[]
+
+  constructor(private videoService: VideoService) {}
 
   ngOnInit() {
+    this.getListVideo();
+  }
+
+  getListVideo() {
+    this.videoService.getVideoList()
+    .subscribe(videos => { this.videos = videos; console.log(videos)});
   }
 
 }
