@@ -2,8 +2,8 @@ const Joi = require('joi');
 const Regex = require('./regex');
 
 module.exports = {
-  // POST /api/user
-  createUser: {
+  // POST /api/auth/register
+  createAuth: {
     body: {
       firstname: Joi.string().required(),
       lastname: Joi.string().required(),
@@ -13,7 +13,26 @@ module.exports = {
     }
   },
 
-  // UPDATE /api/user/:userId
+   // POST /api/auth/login
+   login: {
+    body: {
+      username: Joi.string().required(),
+      password: Joi.string().required()
+    }
+  },
+
+  // POST /api/user
+
+  createUser: {
+    body: {
+      firstname: Joi.string().required(),
+      lastname: Joi.string().required(),
+      username: Joi.string().required(),
+      mobileNumber: Joi.string().regex(Regex.mobile).required()
+    }
+  },
+
+  // PUT /api/user/:userId
   updateUser: {
     body: {
       username: Joi.string().required(),
@@ -27,14 +46,6 @@ module.exports = {
   getUserByUsername: {
     body: {
       username: Joi.string().required()
-    }
-  },
-
-  // POST /api/auth/login
-  login: {
-    body: {
-      username: Joi.string().required(),
-      password: Joi.string().required()
     }
   },
 

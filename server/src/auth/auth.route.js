@@ -13,6 +13,6 @@ router.route('/login')
 
   /** POST /api/auth/register */
 router.route('/register')
-  .post(validate(paramValidation.createUser), authCtrl.create);
+  .post(validate(paramValidation.createAuth), authCtrl.create);
 
 module.exports = router;
