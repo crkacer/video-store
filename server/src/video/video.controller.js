@@ -1,7 +1,10 @@
 const Video = require('./video.model');
-const User = require('../user/user.model');
-const bcrypt = require('bcrypt');
 
+/**
+ * Get Video by id
+ * @param {id} req 
+ * @return {Video} 
+ */
 function load(req, res, next) {
   const indx = req.params.id;
   return Video.get(indx)
@@ -11,7 +14,11 @@ function load(req, res, next) {
     })
     .catch(e => next(e));
 }
-
+/**
+ * Create video
+ * @param {Video} req 
+ * @return {Video} Saved video
+ */
 function create(req, res, next) {
   const params = req.body;
   const video = new Video({
@@ -30,6 +37,11 @@ video.save()
   .catch(e => next(e));
 }
 
+/**
+ * 
+ * @param {id} req 
+ * @return {Video} 
+ */
 function update(req, res, next) {
   const {id} = req.params;
   Video.get(id)
@@ -73,7 +85,15 @@ function remove(req, res, next) {
     .then(deletedVideo => res.json(deletedVideo))
     .catch(e => next(e));
 }
+/**
+ * 
+ * @param {image} req 
+ * @return {message, location} 
+ */
+
+function upload(req, res, next) {
+  res.json({'message': 'File uploaded successfully', 'location': req.image_upload_url});
+}
 
 
-
-module.exports = { load, create, update, list, remove };
+module.exports = { load, create, update, list, remove, upload };
