@@ -1,0 +1,51 @@
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, UrlSegment } from '@angular/router';
+import { VideoService} from '../video.service';
+import { Video } from '../models/video';
+import {environment} from '../../environments/environment';
+import { Observable } from 'rxjs';
+
+@Component({
+  selector: 'video-edit',
+  templateUrl: './video-edit.component.html',
+  styleUrls: ['./video-edit.component.css']
+})
+export class VideoEditComponent implements OnInit {
+
+  video: Video;
+  videoID: String;
+
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private videoService: VideoService
+  ) { }
+
+  ngOnInit() {
+    // this.videoID = this.activatedRoute.url.value[1].path;
+    this.videoID = this.activatedRoute.snapshot.params.id;
+    console.log(this.videoID);
+
+    this.videoService.getVideoById(this.videoID)
+      .subscribe(video => { this.video = video; console.log(video)});
+  }
+
+  fileChange(event) {
+    let fileList: FileList = event.target.files;
+    console.log(fileList);
+    if(fileList.length > 0) {
+      let file: File = fileList[0];
+      let formData:FormData = new FormData();
+      formData.append('image', file);
+      this.videoService.postUploadImage(formData)
+        .subscribe(
+            data => {
+              if (data.location !== undefined) this.video.image = environment.resourceURL + data.location;
+              console.log(data);
+            },
+            error => console.log(error)
+        )
+    }
+}
+
+}

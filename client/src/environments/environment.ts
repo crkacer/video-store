@@ -3,7 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  API: {
+    main: "http://localhost:4040/api",
+    video: "/video/",
+    auth: "/auth/",
+    user: "/user/"
+  },
+  resourceURL: "http://localhost:4040/"
 };
 
 /*

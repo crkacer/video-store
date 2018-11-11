@@ -1,0 +1,40 @@
+<div class="clr-row" id="video-wrapper">
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12">
+        <div class="card-img " id="video-img">
+            <img class="single-img" src="{{ video.image }}" alt=""><br>
+            <input type="file" 
+            (change)="fileChange($event)"
+            placeholder="Upload file" accept=".png,.jpg"    
+            >
+        </div>
+    </div>
+    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
+ 
+        <section class="form-block">
+        <h2><input type="text" value="{{ video.title}}" placeholder="Title" ></h2>
+        <h3>By <input type="text" value="{{ video.director }}" placeholder="Director" > - Thu Sep 14 2017 </h3>
+        <h4>Running Time: <input type="text" value="{{ video.length }}" placeholder="" style="width: 5%"> minutes</h4>
+        <h4>Genre: <input type="text" value="{{ video.genre}}"> </h4>
+        <br>
+        
+            <div class="select col-xl-8 col-lg-8 col-md-8">
+                <select id="aForm_3">
+                    <option value="0" selected disabled>Customer</option>
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                    <option>Option 4</option>
+                </select>
+            </div>
+        <br>
+        <div *ngIf="video.star !== undefined">
+            <img *ngFor="let s of [].constructor(video.star)" src="assets/img/star.svg" alt="Logo" class="logo-img star">
+        </div>
+        <blockquote>
+          <input type="text" value="{{ video.description }}" placeholder="Description" style="width: 100%">
+        </blockquote>
+        <button type="button" class="btn" routerLink="/portal/video-management">Cancel</button>
+        <button type="button" class="btn btn-primary">Update</button>
+        </section>
+    </div>
+  </div>
