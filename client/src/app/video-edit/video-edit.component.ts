@@ -40,12 +40,24 @@ export class VideoEditComponent implements OnInit {
       this.videoService.postUploadImage(formData)
         .subscribe(
             data => {
-              if (data.location !== undefined) this.video.image = environment.resourceURL + data.location;
+              if (data.hasOwnProperty("location")) this.video.image = environment.resourceURL + data['location'];
+              console.log(this.video);
               console.log(data);
             },
             error => console.log(error)
         )
     }
-}
+  }
+
+  updateVideo(event, id) {
+    this.video.star = this.video.star.toString();
+    this.videoService.postUpdateVideo(id, this.video)
+      .subscribe(
+        data => {
+          console.log(data);
+        },
+        error => console.log(error)
+    );
+  }
 
 }

@@ -34,7 +34,7 @@
           <input type="text" value="{{ video.description }}" placeholder="Description" style="width: 100%">
         </blockquote>
         <button type="button" class="btn" routerLink="/portal/video-management">Cancel</button>
-        <button type="button" class="btn btn-primary">Update</button>
+        <button type="button" class="btn btn-primary" (click)="updateVideo($event,video._id)">Update</button>
         </section>
     </div>
   </div>
