@@ -16,20 +16,7 @@
         <h4>Running Time: <input type="text" value="{{ video.length }}" placeholder="" style="width: 5%"> minutes</h4>
         <h4>Genre: <input type="text" value="{{ video.genre}}"> </h4>
         <br>
-        
-            <div class="select col-xl-8 col-lg-8 col-md-8">
-                <select id="aForm_3">
-                    <option value="0" selected disabled>Customer</option>
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                    <option>Option 3</option>
-                    <option>Option 4</option>
-                </select>
-            </div>
-        <br>
-        <div *ngIf="video.star !== undefined">
-            <img *ngFor="let s of [].constructor(video.star)" src="assets/img/star.svg" alt="Logo" class="logo-img star">
-        </div>
+        <input type="text" placeholder="Star" style="width: 1%;" value="{{ video.star }}">/5
         <blockquote>
           <input type="text" value="{{ video.description }}" placeholder="Description" style="width: 100%">
         </blockquote>

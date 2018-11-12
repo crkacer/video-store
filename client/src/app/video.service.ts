@@ -59,4 +59,8 @@ export class VideoService {
         return this.http.put(this.rootURL+this.videoURI+id, video, this.httpOptionsWithToken);
     }
 
+    postCreateVideo(video: Video):Observable<Object> {
+        return this.http.post(this.rootURL+this.videoURI, video, this.httpOptionsWithToken);
+    }
+
 }
