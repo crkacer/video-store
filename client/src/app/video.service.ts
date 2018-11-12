@@ -9,8 +9,7 @@ import { CookieService } from "ngx-cookie-service";
 
 const httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-      'Authorization': 'my-auth-token'
+      'Content-Type':  'application/json'
     })
   };
 
@@ -55,12 +54,16 @@ export class VideoService {
         return this.http.post(this.rootURL+this.videoURI+'upload-image', formData, this.httpOptionsWithToken);
     }
 
-    postUpdateVideo(id: String, video: Video ):Observable<Object> {
+    putUpdateVideo(id: String, video: Video ):Observable<Object> {
         return this.http.put(this.rootURL+this.videoURI+id, video, this.httpOptionsWithToken);
     }
 
     postCreateVideo(video: Video):Observable<Object> {
         return this.http.post(this.rootURL+this.videoURI, video, this.httpOptionsWithToken);
+    }
+
+    deleteVideo(id: String):Observable<Object> {
+        return this.http.delete(this.rootURL+this.videoURI+id,this.httpOptionsWithToken);
     }
 
 }

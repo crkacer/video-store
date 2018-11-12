@@ -10,31 +10,18 @@
           <th>Delete</th>
       </tr>
   </thead>
-  <tbody>
-      <tr *ngFor="let item of [1,2,3,4,5,6]">
-          <td><img alt="" style="width: 50px;" src="https://2.bp.blogspot.com/-Tc5FpWGHMrM/WyR_YCc_HKI/AAAAAAAFFuo/KpXuVB1A-do_UOZzHqZYjUl35PtGG6xtgCHMYCw/s0/dr_seuss_how_the_grinch_stole_christmas-454843405-large.jpg" ></td>
-          <td>The Grinch</td>
-          <td>120 minutes</td>
-          <td>Ms. Kim Ji-won</td>
+  <tbody >
+      <tr *ngFor="let video of videos">
+          <td><img alt="" style="width: 50px;" src="{{ video.image}}" ></td>
+          <td>{{ video.title}}</td>
+          <td>{{ video.length }} minutes</td>
+          <td>{{ video.director }}</td>
           <td>
             <img src="assets/img/star.svg" alt="Logo" class="logo-img star">
-            <span>5/5</span>
+            <span>{{ video.star }}/5</span>
           </td>
-          <td><button type="button" class="btn btn-primary">Edit</button></td>
-          <td><button type="button" class="btn btn-danger">Delete</button></td>
-      </tr>
-
-      <tr *ngFor="let item of [1,2]">
-          <td><img alt="" style="width: 50px;" src="https://2.bp.blogspot.com/-Tc5FpWGHMrM/WyR_YCc_HKI/AAAAAAAFFuo/KpXuVB1A-do_UOZzHqZYjUl35PtGG6xtgCHMYCw/s0/dr_seuss_how_the_grinch_stole_christmas-454843405-large.jpg" ></td>
-          <td>The Grinch</td>
-          <td>120 minutes</td>
-          <td>Ms. Kim Ji-won</td>
-          <td>
-            <img src="assets/img/star.svg" alt="Logo" class="logo-img star">
-            <span>4/5</span>
-          </td>
-          <td><button type="button" class="btn btn-primary">Edit</button></td>
-          <td><button type="button" class="btn btn-danger">Delete</button></td>
+          <td><button type="button" class="btn btn-primary" routerLink="/portal/video-edit/{{video._id}}">Edit</button></td>
+          <td><button type="button" class="btn btn-danger" (click)="deleteVideo(video._id)">Delete</button></td>
       </tr>
 
   </tbody>
