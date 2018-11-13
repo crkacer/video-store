@@ -1,5 +1,4 @@
 const Video = require('./video.model');
-
 /**
  * Get Video by id
  * @param {id} req 
@@ -81,7 +80,7 @@ function list(req, res, next) {
  */
 function remove(req, res, next) {
   const id = req.params.id;
-  Video.remove(id)
+  Video.deleteOne({_id: id})
     .then(deletedVideo => res.json(deletedVideo))
     .catch(e => next(e));
 }
@@ -95,5 +94,13 @@ function upload(req, res, next) {
   res.json({'message': 'File uploaded successfully', 'location': req.image_upload_url});
 }
 
+function search(req, res, next) {
+  const text = req.query.text;
+  Video.search(text)
+    .then(videos => res.json(videos))
+    .catch(e => next(e));
+}
 
-module.exports = { load, create, update, list, remove, upload };
+
+
+module.exports = { load, create, update, list, remove, upload, search };

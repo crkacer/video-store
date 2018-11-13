@@ -1,17 +1,16 @@
 <div class="clr-row" id="video-wrapper">
   <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12">
       <div class="card-img " id="video-img">
-          <img class="single-img" src="https://2.bp.blogspot.com/-Tc5FpWGHMrM/WyR_YCc_HKI/AAAAAAAFFuo/KpXuVB1A-do_UOZzHqZYjUl35PtGG6xtgCHMYCw/s0/dr_seuss_how_the_grinch_stole_christmas-454843405-large.jpg" alt="">
+          <img class="single-img" [src]="video.image" alt="">
       </div>
   </div>
   <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
       <form>
           <section class="form-block">
-      <h2>The Grinch</h2>
-      <h3>By <a href="#">Author</a> - Thu Sep 14 2017 </h3>
-      <h4>Running Time: 120 minutes</h4>
-      <h4>Genre: Catoon</h4>
-      <h4>Director: Kim Ji-won</h4>
+      <h2>{{ video.title }}</h2>
+      <h3>By <a href="#">{{ video.director }}</a> - Thu Sep 14 2017 </h3>
+      <h4>Running Time: {{ video.length }} minutes</h4>
+      <h4>Genre: {{ video.genre }}</h4>
       
           <div class="select col-xl-8 col-lg-8 col-md-8">
               <select id="aForm_3">
@@ -28,7 +27,7 @@
       <img src="assets/img/star.svg" alt="Logo" class="logo-img star">
       <img src="assets/img/star.svg" alt="Logo" class="logo-img star">
       
-      <blockquote>Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.</blockquote>
+      <blockquote>{{ video.description }}</blockquote>
 
       <button type="button" class="btn" routerLink="/videos">Cancel</button>
       <button type="button" class="btn btn-primary">Reserve</button>

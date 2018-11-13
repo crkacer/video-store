@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const VideoSchema = mongoose.Schema({
+let VideoSchema = mongoose.Schema({
 
     title: {
         type: String,
@@ -49,6 +49,8 @@ const VideoSchema = mongoose.Schema({
     }
 });
 
+VideoSchema.index({title: 'text'});
+
 VideoSchema.statics = {
 
     /**
@@ -72,6 +74,15 @@ VideoSchema.statics = {
 
     remove(id) {
         return this.remove({_id: id}).exec();
+    },
+
+    search(text) {
+        // const regex = new RegExp("//" + text + "//i");
+        return this.find({ $text : { $search : text } })
+            .sort({ createdAt: -1 })
+            .exec();
+
+        // return this.textSearch(text);
     }
 }
 
