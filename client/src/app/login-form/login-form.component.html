@@ -2,8 +2,8 @@
     <div class="login">
         <section class="title">
             <h3 class="welcome">Welcome to</h3>
-            Company Product Name
-            <h5 class="hint">Use your Company ID to sign in or create one now</h5>
+            Will's Video Store
+            <h5 class="hint">Use your credentials to sign in or create one now</h5>
         </section>
         <div class="login-group">
             <input #username class="username" type="text" id="login_username" placeholder="Username">
@@ -14,11 +14,11 @@
                     Remember me
                 </label>
             </div>
-            <div class="error active">
+            <div *ngIf="loginError === true" class="error active">
                 Invalid user name or password
             </div>
             <button (click)="login(username.value, password.value)" class="btn btn-primary">NEXT</button>
-            <a href="javascript://" class="signup">Sign up for a Company ID</a>
+            <a href="javascript://" class="signup">Sign up for an account</a>
         </div>
     </div>
 </div>

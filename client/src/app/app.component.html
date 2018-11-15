@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Page Title</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="https://unpkg.com/@clr/ui@0.12.5/clr-ui.min.css" />
 
   <link rel="stylesheet" href="https://unpkg.com/clarity-icons/clarity-icons.min.css">
@@ -21,27 +21,38 @@
 
 </head>
 <body>
-    <header class="header-6">
-        <div class="branding">
-            ...
-        </div>
-        <div class="header-nav">
-            <a routerLinkActive="active" routerLink="/videos" class="nav-link nav-text">Video Store</a> 
-            <a routerLinkActive="active" routerLink="/login" class="nav-link nav-text">Login</a> 
-        </div>
-        <form class="search">
-            <label for="search_input">
-              <input id="search_input" type="text" placeholder="Search for keywords...">
-            </label>
-          </form>
-        <div class="header-actions">
-            <a href="javascript://" class="nav-link nav-icon">
-                <clr-icon shape="cog"></clr-icon>
-            </a>
-        </div>
-    </header>
+    <div class="main-container">
+      <header class="header-6">
+          <div class="branding">
+              <a routerLink="/videos"><img src="assets/img/video-player.svg" alt="" style="width: 50px;"></a>
+          </div>
+          <div class="header-nav">
+              <a routerLinkActive="active" routerLink="/videos" class="nav-link nav-text">Video Store</a> 
+              <a routerLinkActive="active" routerLink="/login" class="nav-link nav-text" *ngIf="cookieValue == 'UNKNOWN'">Login</a> 
+              <a routerLinkActive="active" routerLink="/portal/video-management" class="nav-link nav-text" *ngIf="cookieValue != 'UNKNOWN'">Admin Portal</a>
+          </div>
+          <form class="search">
+              <label for="search_input">
+                <input 
+                    (input)="searchChanged($event.target.value)"
+                    id="search_input" type="text" placeholder="Search for keywords..." list="browsers">
+                    <datalist id="browsers">
+                        <option *ngFor="let video of videoSuggestions" (click)="testClick(video._id)">
+                            <img src="{{video.image}}" alt="image">{{ video.title}}
+                        </option>
+                      </datalist>
+              </label>
+            </form>
+          <div class="header-actions">
+              <a href="javascript://" class="nav-link nav-icon">
+                  <clr-icon shape="cog"></clr-icon>
+              </a>
+          </div>
+      </header>
+      <router-outlet></router-outlet>
+    </div>
   
-  <router-outlet></router-outlet>
+  
   
 </body>
 </html>

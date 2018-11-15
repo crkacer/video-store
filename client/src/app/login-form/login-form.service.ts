@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import {HandleError, HttpErrorHandler} from '../http-error-handler.service';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import {User} from '../models/user';
+import {Auth} from '../models/auth';
+import {AuthToken} from '../models/auth_token';
 const httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
@@ -23,10 +24,7 @@ export class LoginService {
         this.handleError = httpErrorHandler.createHandleError('LoginService');
       }
 
-    login(user: User):Observable<User> {
-        return this.http.post<User>(this.loginURL, user, httpOptions)
-            .pipe(
-                catchError(this.handleError('postLogin', user))
-            )
+    login(user: Auth):Observable<AuthToken> {
+        return this.http.post<AuthToken>(this.loginURL, user, httpOptions);
     }
 }

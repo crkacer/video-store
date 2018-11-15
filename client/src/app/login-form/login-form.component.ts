@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {LoginService} from './login-form.service';
 import {User} from '../models/user';
 import { CookieService } from 'ngx-cookie-service';
-import {AuthToken} from '../models/auth_token';
+import {Auth} from '../models/auth';
 
 @Component({
   selector: 'login-form',
@@ -11,7 +11,8 @@ import {AuthToken} from '../models/auth_token';
 })
 export class LoginFormComponent implements OnInit {
 
-  userLogin: User;
+  userLogin: Auth;
+  loginError: Boolean = false;
   constructor(
     private loginService: LoginService,
     private cookieService: CookieService) { }
@@ -23,8 +24,12 @@ export class LoginFormComponent implements OnInit {
     this.userLogin = {username, password};
     if (this.userLogin) {
       this.loginService.login(this.userLogin)
-        .subscribe((authData: AuthToken)=> this.setCookie(authData.username, authData.token));
+        .subscribe(authData => {
+          this.loginError = false;
+          this.setCookie(authData.username, authData.token);
+        });
       this.userLogin = undefined;
+      this.loginError = true;
     }
   }
 

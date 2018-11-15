@@ -15,6 +15,12 @@ import { AdminPortalComponent } from './admin-portal/admin-portal.component';
 import { VideoManagementComponent } from './video-management/video-management.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { VideoCreationComponent } from './video-creation/video-creation.component';
+import { VideoService } from './video.service';
+import { VideoEditComponent } from './video-edit/video-edit.component';
+import { FormsModule } from '@angular/forms';
+import { UserCreationComponent } from './user-creation/user-creation.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
+import { UserService } from './user.service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'videos', pathMatch: 'full' },
@@ -26,7 +32,10 @@ const appRoutes: Routes = [
         { path: '', redirectTo: 'portal', pathMatch: 'full' },
         { path: 'video-management', component: VideoManagementComponent },
         { path: 'video-create', component: VideoCreationComponent },
-        { path: 'user-management', component: UserManagementComponent }
+        { path: 'user-management', component: UserManagementComponent },
+        { path: 'user-create', component: UserCreationComponent },
+        { path: 'video-edit/:id', component: VideoEditComponent },
+        { path: 'user-edit/:id', component: UserEditComponent}
       ]
   },
   
@@ -43,21 +52,27 @@ const appRoutes: Routes = [
     AdminPortalComponent,
     VideoManagementComponent,
     UserManagementComponent,
-    VideoCreationComponent
+    VideoCreationComponent,
+    VideoEditComponent,
+    UserCreationComponent,
+    UserEditComponent
   ],
   imports: [
     RouterModule.forRoot(
       appRoutes
     ),
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   exports: [RouterModule],
   providers: [
     CookieService,
     LoginService,
     HttpErrorHandler,
-    MessageService
+    MessageService,
+    VideoService,
+    UserService
   ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
