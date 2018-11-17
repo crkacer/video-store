@@ -1,6 +1,18 @@
-<div class="row">
-    <video-single 
-        *ngFor="let video of videos"
-        [video]="video"
-    ></video-single>
-</div>
+
+<div class="row column text-center">
+        <h2>Our Newest Products</h2>
+        <hr>
+    </div>
+    <div class="row small-up-1 large-up-3">
+        <div *ngFor="let video of videos" 
+         class="column">
+            <img class="thumbnail column-custom" src="{{ video.image}}">
+            <img *ngFor="let s of [].constructor(video.star)" src="assets/img/star.svg" alt="Logo" class="logo-img star">
+            <h5>{{ video.title}}</h5>
+            <p>{{ video.director}}</p>
+            
+            <a routerLink="/video/{{video._id}}" class="button expanded ">Reserve</a>
+        </div>
+
+        
+    </div>

@@ -1,4 +1,4 @@
-<table class="table">
+<!-- <table class="table">
   <thead>
       <tr>
           <th></th>
@@ -6,6 +6,7 @@
           <th>Length</th>
           <th>Author</th>
           <th>Star</th>
+          <th>Status</th>
           <th>Edit</th>
           <th>Delete</th>
       </tr>
@@ -20,9 +21,31 @@
             <img src="assets/img/star.svg" alt="Logo" class="logo-img star">
             <span>{{ video.star }}/5</span>
           </td>
+          <td>{{ video.status }}</td>
           <td><button type="button" class="btn btn-primary" routerLink="/portal/video-edit/{{video._id}}">Edit</button></td>
           <td><button type="button" class="btn btn-danger" (click)="deleteVideo(video._id)">Delete</button></td>
       </tr>
 
   </tbody>
-</table>
+</table> -->
+
+<div>
+    <input
+        type='text'
+        style='padding:8px;margin:15px auto;width:30%;'
+        placeholder='Type to filter the name column...'
+        (keyup)='updateFilter($event)'
+    />
+    <ngx-datatable
+        #table
+        class='material'
+        [rows]='rows'
+        [columns]="columns"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [limit]="2"
+        >
+    </ngx-datatable>
+</div>
