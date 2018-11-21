@@ -12,3 +12,12 @@
 .column-custom {
     width: 100%;
 }
+
+.single-image {
+
+    height: 500px;
+    width: 100%;
+    background-size: cover;
+    margin: 30px auto;
+    position: relative;
+}

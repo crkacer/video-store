@@ -4,15 +4,15 @@
         <hr>
     </div>
     <div class="row small-up-1 large-up-3">
-        <div *ngFor="let video of videos" 
-         class="column">
-            <img class="thumbnail column-custom" src="{{ video.image}}">
+        <div *ngFor="let video of videos" class="column ">
+            <div class="single-image thumbnail"
+                [ngStyle]="{'background-image': getURL(video.image)}"></div>
+
             <img *ngFor="let s of [].constructor(video.star)" src="assets/img/star.svg" alt="Logo" class="logo-img star">
             <h5>{{ video.title}}</h5>
             <p>{{ video.director}}</p>
             
             <a routerLink="/video/{{video._id}}" class="button expanded ">Reserve</a>
         </div>
-
         
     </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Http} from '@angular/http';
-import {VideoService} from './video-grid.service';
+import {VideoService} from '../video.service';
 import { Video } from '../models/video';
 
 @Component({
@@ -21,6 +21,12 @@ export class VideoGridComponent implements OnInit {
   getListVideo() {
     this.videoService.getVideoList()
     .subscribe(videos => { this.videos = videos; console.log(videos)});
+  }
+
+  getURL(id) {
+    console.log(id);
+    return `url(${id})`;
+
   }
 
 }
