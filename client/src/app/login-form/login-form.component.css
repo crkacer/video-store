@@ -1,5 +1,5 @@
-.login-wrapper {
-    background: url(https://i.imgur.com/0vY8E.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-}
+.log-in-form {
+    border: 1px solid #cacaca;
+    padding: 1rem;
+    border-radius: 0;
+  }

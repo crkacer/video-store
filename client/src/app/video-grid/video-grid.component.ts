@@ -24,9 +24,7 @@ export class VideoGridComponent implements OnInit {
   }
 
   getURL(id) {
-    console.log(id);
     return `url(${id})`;
-
   }
 
 }

@@ -30,7 +30,8 @@ export class VideoService {
 
         this.handleError = httpErrorHandler.createHandleError('VideoGridService');
         console.log(environment.API);
-        const token = this.cookieService.get("auth-token");
+        const token = this.cookieService.get("auth_token");
+        console.log(token);
         this.httpOptionsWithToken = {
             headers: new HttpHeaders({
               'Authorization': 'Bearer ' + token,
@@ -64,6 +65,15 @@ export class VideoService {
 
     deleteVideo(id: String):Observable<Object> {
         return this.http.delete(this.rootURL+this.videoURI+id,this.httpOptionsWithToken);
+    }
+
+    getSearchVideo(text: String):Observable<Video[]>{
+        return this.http.get<Video[]>(this.rootURL+this.videoURI+'search?text='+text);
+    }
+
+    postReserveVideo(videoID: String, userID: String):Observable<any> {
+        const reserve = {videoID: videoID, userID: userID};
+        return this.http.post(this.rootURL+this.videoURI+"reserve", reserve, this.httpOptionsWithToken);
     }
 
 }

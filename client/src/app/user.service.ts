@@ -7,16 +7,24 @@ import { User } from "./models/user";
 import { environment } from '../environments/environment';
 import { CookieService } from "ngx-cookie-service";
 
+let httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json'
+  })
+};
+
 @Injectable()
 export class UserService {
     private rootURL : string = environment.API.main;
     private listUserURI : string = environment.API.user + 'list';
-    private userURI : string = environment.API.video;
+    private listActiveUserURI : string = environment.API.user + 'list-available';
+    private userURI : string = environment.API.user;
     private token: string;
     private httpOptionsWithToken;
 
     private handleError: HandleError;
 
+  
     constructor(
         private http: HttpClient,
         httpErrorHandler: HttpErrorHandler,
@@ -31,16 +39,22 @@ export class UserService {
               'Accept': 'application/json'
             })
           };
+
+        httpOptions = this.httpOptionsWithToken;
       }
     
 
-    getUserList():Observable<Object> {
-        return this.http.get<User[]>(this.rootURL+this.listUserURI, this.httpOptionsWithToken);
+    getUserList():Observable<User[]> {
+        return this.http.get<User[]>(this.rootURL+this.listUserURI, httpOptions);
         
     }
 
-    getUserById(id: String):Observable<Object> {
-        return this.http.get<User>(this.rootURL+this.userURI+id, this.httpOptionsWithToken);
+    getActiveUserList():Observable<User[]> {
+        return this.http.get<User[]>(this.rootURL+this.listActiveUserURI, httpOptions);
+    }
+
+    getUserById(id: String):Observable<User> {
+        return this.http.get<User>(this.rootURL+this.userURI+id, httpOptions);
     }
 
 
