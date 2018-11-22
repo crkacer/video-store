@@ -4,7 +4,7 @@ import { Video } from '../models/video';
 import { environment } from '../../environments/environment';
 
 @Component({
-  selector: 'app-video-creation',
+  selector: 'video-create',
   templateUrl: './video-creation.component.html',
   styleUrls: ['./video-creation.component.css']
 })

@@ -51,7 +51,7 @@ export class VideoEditComponent implements OnInit {
 
   updateVideo(event, id) {
     this.video.star = this.video.star.toString();
-    this.videoService.postUpdateVideo(id, this.video)
+    this.videoService.putUpdateVideo(id, this.video)
       .subscribe(
         data => {
           console.log(data);
