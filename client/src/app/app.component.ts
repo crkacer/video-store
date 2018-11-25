@@ -4,6 +4,8 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { VideoService } from './video.service';
 import { Video } from './models/video';
+import { routerNgProbeToken } from '@angular/router/src/router_module';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,14 +14,18 @@ import { Video } from './models/video';
 })
 export class AppComponent implements OnInit {
   title = 'video-store';
-  cookieValue;
-  search = "";
+  cookieValue: string;
+  search: string = "";
   searchChangeObserver;
-  videoSuggestions: Video[]
+  videoSuggestions: Video[];
+  chosenSuggestion: string;
+  videos: Video[];
+  chosenVideo: Video;
   
   constructor(
     private cookieService: CookieService,
-    private videoService: VideoService) {}
+    private videoService: VideoService,
+    private router: Router) {}
 
   ngOnInit(): void {
     this.cookieValue = 'UNKNOWN';
@@ -35,7 +41,7 @@ export class AppComponent implements OnInit {
     if (!this.searchChangeObserver) {
       Observable.create(observer => {
         this.searchChangeObserver = observer;
-      }).pipe(debounceTime(1000))
+      }).pipe(debounceTime(500))
         .pipe(distinctUntilChanged())
         .subscribe(
           data => {
@@ -47,7 +53,15 @@ export class AppComponent implements OnInit {
     this.searchChangeObserver.next(searchValue);
   }
 
-  testClick(id:string) {
-    console.log(id);
+  enterSearch() {
+    console.log(this.chosenVideo);
+    if (this.chosenVideo !== null) 
+      this.router.navigateByUrl('/video/' + this.chosenVideo["_id"]);
+    this.chosenVideo = null;
+  }
+
+  changeSuggestion(title) {
+    this.chosenVideo =  this.videoSuggestions.find(video => video.title === title);
+    console.log(this.chosenVideo["_id"]);
   }
 }

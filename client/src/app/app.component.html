@@ -7,6 +7,10 @@
     <title>Foundation | Welcome</title>
     <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
     <link href='https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://unpkg.com/carbon-components/css/carbon-components.min.css">
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+    <script src="https://unpkg.com/carbon-components/scripts/carbon-components.min.js"></script>
 
 </head>
 
@@ -43,15 +47,10 @@
                 <ul class="dropdown menu" data-dropdown-menu>
                     <li class="menu-text">Will's Video Store</li>
                     <li><a routerLinkActive="active" routerLink="/videos" >Video Store</a></li>  
-                    <li><a routerLinkActive="active" routerLink="/login"  *ngIf="cookieValue == 'UNKNOWN'">Login</a></li>
+                    <li><a routerLinkActive="active" routerLink="/login"  *ngIf="cookieValue == ''">Login</a></li>
                     <li class="has-submenu">
-                        <a routerLinkActive="active" routerLink="/portal/video-management"  *ngIf="cookieValue != 'UNKNOWN'">Admin Portal</a>
+                        <a routerLinkActive="active" routerLink="/portal/video-management"  *ngIf="cookieValue != ''" >Admin Portal</a>
 
-                        <ul class="submenu menu vertical" data-submenu>
-                            <li><a href="#">One</a></li>
-                            <li><a href="#">Two</a></li>
-                            <li><a href="#">Three</a></li>
-                        </ul>
                     </li>
                 </ul>
             </div>
@@ -61,13 +60,14 @@
                 <ul class="menu">
                         <li><input
                         (input)="searchChanged($event.target.value)"
-                        id="search_input" type="text" placeholder="Search for keywords..." list="browsers"></li>
-                        <datalist id="browsers">
-                            <option *ngFor="let video of videoSuggestions" (click)="testClick(video._id)">
-                                <img src="{{video.image}}" alt="image">{{ video.title}}
+                        id="search_input" type="text" placeholder="Search for keywords..." list="browsers" 
+                        [(ngModel)]='chosenSuggestion' (change)="changeSuggestion(chosenSuggestion)"></li>
+                        <datalist id="browsers" >
+                            <option *ngFor="let video of videoSuggestions" [id]="video._id">
+                                {{ video.title }}
                             </option>
                           </datalist>
-                    <li><button type="button" class="button">Search</button></li>
+                    <li><button type="button" class="button" (click)="enterSearch()">Search</button></li>
                 </ul>
             </div>
         </div>
@@ -80,8 +80,7 @@
         
         
 
-        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-        <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+        
         <script>
             $(document).foundation();
         </script>
