@@ -64,8 +64,8 @@ VideoSchema.statics = {
 
     /**
    * List videos in descending order of 'createdAt' timestamp.
-   * @param {number} skip - Number of users to be skipped.
-   * @param {number} limit - Limit number of users to be returned.
+   * @param {number} skip - Number of videos to be skipped.
+   * @param {number} limit - Limit number of videos to be returned.
    * @returns {Promise<Video[]>}
    */
     list({ skip = 0, limit = 50 } = {}) {
@@ -77,12 +77,9 @@ VideoSchema.statics = {
     },
 
     search(text) {
-        // const regex = new RegExp("//" + text + "//i");
         return this.find({ $text : { $search : text } })
             .sort({ createdAt: -1 })
             .exec();
-
-        // return this.textSearch(text);
     }
 }
 

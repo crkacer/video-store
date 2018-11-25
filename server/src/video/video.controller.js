@@ -1,4 +1,5 @@
 const Video = require('./video.model');
+const User = require('../user/user.model');
 /**
  * Get Video by id
  * @param {id} req 
@@ -101,6 +102,24 @@ function search(req, res, next) {
     .catch(e => next(e));
 }
 
+function reserve(req, res, next) {
+  // const { userID, videoID } = req.body;
+  const userID = req.body.userID;
+  const videoID = req.body.videoID;
+  return User.get(userID)
+    .then(user => 
+        Video.get(videoID)
+        .then(video => {
+            video.status = user._id;
+            return video.save()
+              .then(savedVideo => res.json(savedVideo))
+              .catch(e => next(e));
+        })
+        .catch(e => next(e))
+    )
+    .catch(e => next(e));
+}
 
 
-module.exports = { load, create, update, list, remove, upload, search };
+
+module.exports = { load, create, update, list, remove, upload, search, reserve };

@@ -21,6 +21,14 @@ router.route('/search')
     /** GET /api/video/search?text=  - Search video*/
     .get(videoCtrl.search);
 
+router.route('/upload-image')
+    /** POST /api/video/upload-image - Upload image */
+    .post(expressJwt({ secret: config.jwtSecret }), upload.single('image'), videoCtrl.upload);
+
+router.route('/reserve')
+    /** POST /api/video/reserve -- Reserve video */
+    .post(expressJwt({ secret: config.jwtSecret }), validate(paramValidation.reserveVideo), videoCtrl.reserve);
+
 router.route('/:id')
     /** GET /api/video/:id */
     .get(videoCtrl.load)
@@ -29,9 +37,7 @@ router.route('/:id')
     /** DELETE /api/video/:id - Delete video */
     .delete(expressJwt({ secret: config.jwtSecret }), videoCtrl.remove);
 
-router.route('/upload-image')
-    /** POST /api/video/upload-image - Upload image */
-    .post(expressJwt({ secret: config.jwtSecret }), upload.single('image'), videoCtrl.upload);
+
 
 
 module.exports = router;
