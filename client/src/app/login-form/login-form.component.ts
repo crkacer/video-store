@@ -3,6 +3,7 @@ import {LoginService} from './login-form.service';
 import {User} from '../models/user';
 import { CookieService } from 'ngx-cookie-service';
 import {Auth} from '../models/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'login-form',
@@ -13,9 +14,11 @@ export class LoginFormComponent implements OnInit {
 
   userLogin: Auth;
   loginError: Boolean = false;
+  cookieValue: string;
   constructor(
     private loginService: LoginService,
-    private cookieService: CookieService) { }
+    private cookieService: CookieService,
+    private router: Router) { }
   
   ngOnInit() {
   }
@@ -27,6 +30,9 @@ export class LoginFormComponent implements OnInit {
         .subscribe(authData => {
           this.loginError = false;
           this.setCookie(authData.username, authData.token);
+          window.location.reload();
+          this.router.navigateByUrl('/portal/video-management');
+
         });
       this.userLogin = undefined;
       this.loginError = true;

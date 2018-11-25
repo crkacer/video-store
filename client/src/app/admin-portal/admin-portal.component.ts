@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-admin-portal',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminPortalComponent implements OnInit {
 
-  constructor() { }
+  cookieValue: string;
+
+  constructor(private cookieService: CookieService, 
+    private router: Router) { }
 
   ngOnInit() {
+    this.cookieValue = 'UNKNOWN';
+    this.cookieValue = this.cookieService.get('auth_token');
+
+    if (this.cookieValue == '') {
+      this.router.navigateByUrl('/videos');
+    }
+
   }
 
 }

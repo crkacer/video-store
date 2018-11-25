@@ -1,28 +1,11 @@
-
-<div class="main-container">
-  <div class="content-container">
-      <nav class="sidenav">
-          <section class="sidenav-content">
-              <section class="nav-group collapsible">
-                  <input id="tabexample1" type="checkbox">
-                  <label for="tabexample1">Videos</label>
-                  <ul class="nav-list">
-                      <li><a class="nav-link" routerLinkActive="active" routerLink="/portal/video-management">All Videos</a></li>
-                      <li><a class="nav-link" routerLinkActive="active" routerLink="/portal/video-create">Create</a></li>
-                  </ul>
-              </section>
-
-              <section class="nav-group collapsible">
-                <input id="tabexample2" type="checkbox">
-                <label for="tabexample2">User</label>
-                <ul class="nav-list">
-                    <li><a class="nav-link" routerLinkActive="active" routerLink="/portal/user-management">All Users</a></li>
-                    <li><a class="nav-link" routerLinkActive="active" routerLink="/portal/user-create">Create</a></li>
-                </ul>
-            </section>
-
-          </section>
-      </nav>
-      <router-outlet></router-outlet>
-  </div>
-</div>
+<div class="column row">
+        <hr>
+        <ul class="tabs" data-tabs id="example-tabs">
+            <li class="tabs-title is-active"><a routerLinkActive="active" routerLink="/portal/video-management" aria-selected="true">Videos</a></li>
+            <li class="tabs-title"><a routerLinkActive="active" routerLink="/portal/user-management">Users</a></li>
+        </ul>
+        <div class="tabs-content" data-tabs-content="example-tabs">
+            
+            <router-outlet></router-outlet>
+        </div>
+    </div>
