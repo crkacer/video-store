@@ -1,4 +1,8 @@
 export interface User {
-    username: string;
-    password: string;
+    firstname: string,
+    lastname: string,
+    address: string, 
+    city: string,
+    mobileNumber: string,
+    status: string
 }
