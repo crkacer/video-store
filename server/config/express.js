@@ -19,6 +19,11 @@ const app = express();
 if (config.env === 'development') {
   app.use(logger('dev'));
 }
+// serve static files
+app.use(express.static('public'));
+
+// disable auto caching
+app.disable('etag');
 
 // parse body params and attache them to req.body
 app.use(bodyParser.json());
