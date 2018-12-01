@@ -31,8 +31,7 @@ const UserSchema = new mongoose.Schema({
   },
   mobileNumber: {
     type: String,
-    required: true,
-    match: [Regex.mobile, 'The value of path {PATH} ({VALUE}) is not a valid mobile number.']
+    required: true
   },	
   createdAt: {
     type: Date,

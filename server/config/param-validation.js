@@ -9,7 +9,7 @@ module.exports = {
       lastname: Joi.string().required(),
       username: Joi.string().required(),
       password: Joi.string().required(),
-      mobileNumber: Joi.string().regex(Regex.mobile).required()
+      mobileNumber: Joi.string().required()
     }
   },
 
@@ -27,16 +27,22 @@ module.exports = {
     body: {
       firstname: Joi.string().required(),
       lastname: Joi.string().required(),
-      username: Joi.string().required(),
-      mobileNumber: Joi.string().regex(Regex.mobile).required()
+      address: Joi.string().required(),
+      city: Joi.string().required(),
+      status: Joi.string().required(),
+      mobileNumber: Joi.string().required()
     }
   },
 
   // PUT /api/user/:userId
   updateUser: {
     body: {
-      username: Joi.string().required(),
-      mobileNumber: Joi.string().regex(Regex.mobile).required()
+      firstname: Joi.string().required(),
+      lastname: Joi.string().required(),
+      address: Joi.string().required(),
+      city: Joi.string().required(),
+      status: Joi.string().required(),
+      mobileNumber: Joi.string().required()
     },
     params: {
       userId: Joi.string().hex().required()
@@ -77,11 +83,12 @@ module.exports = {
     }
   },
 
-  // DELETE /api/video/:id
-  deleteVideo: {
+  // POST /api/video/reserve
+  reserveVideo: {
     body: {
-      id: Joi.string().required()
+      userID: Joi.string().required(),
+      videoID: Joi.string().required()
     }
-  },
+  }
 
 };

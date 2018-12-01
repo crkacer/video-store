@@ -10,7 +10,7 @@ const bcrypt = require('bcrypt');
  * @property {string} req.body.mobileNumber - The mobileNumber of user.
  * @returns {User}
  */
-async function create(req, res, next) {
+ function create(req, res, next) {
   const user = new User({
     firstname: req.body.firstname,
     lastname: req.body.lastname,
@@ -32,13 +32,22 @@ async function create(req, res, next) {
  * @returns {User}
  */
 function update(req, res, next) {
-  const user = req.user;
-  user.username = req.body.username;
-  user.mobileNumber = req.body.mobileNumber;
+  const id = req.params.userId;
+  console.log(id);
+  User.get(id)
+      .then(user => {
+        user.firstname = req.body.firstname;
+        user.lastname = req.body.lastname;
+        user.address = req.body.address;
+        user.city = req.body.city;
+        user.status = req.body.status;
+        user.mobileNumber = req.body.mobileNumber;
+        user.save()
+          .then(savedUser => res.json(savedUser))
+          .catch(e => next(e));
+          })
+      .catch(e => next(e));
 
-  user.save()
-    .then(savedUser => res.json(savedUser))
-    .catch(e => next(e));
 }
 
 /**
@@ -72,8 +81,8 @@ function listAvailable(req, res, next) {
  * @returns {User}
  */
 function remove(req, res, next) {
-  const id = req.params.id;
-  User.remove(id)
+  const id = req.params.userId;
+  User.deleteOne({_id: id})
     .then(deletedUser => res.json(deletedUser))
     .catch(e => next(e));
 }
@@ -86,13 +95,17 @@ function remove(req, res, next) {
  */
 
 function get(req, res, next) {
-  const username = req.body.username;
+  const indx = req.params.userId;
 
-  User.getByUsername(username)
-    .then(user => {
-      return res.json(user);
-    })
+    return User.get(indx)
+        .then(user => {
+            req.user = user;
+                return res.json(user);
+            })
     .catch(e => next(e));
 }
+
+
+
 
 module.exports = { get, create, update, list, remove, listAvailable };
