@@ -1,3 +1,3 @@
-/**
- * Created by MGXA2 on 11/30/18.
- */
+export interface Log {
+    authorized: boolean;
+}

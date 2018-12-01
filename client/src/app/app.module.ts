@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { VideoGridComponent } from './video-grid/video-grid.component';
 import { LoginFormComponent } from './login-form/login-form.component';
-import { VideoSingleComponent } from './video-single/video-single.component';
 import { VideoDetailComponent } from './video-detail/video-detail.component';
 import {LoginService} from '../app/login-form/login-form.service';
 import { CookieService } from 'ngx-cookie-service';
@@ -21,6 +20,29 @@ import { FormsModule } from '@angular/forms';
 import { UserCreationComponent } from './user-creation/user-creation.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserService } from './user.service';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import StoreModule from './store/store'
+
+import {
+  TabsModule,
+  IconModule,
+  ButtonModule,
+  TableModule,
+  PaginationModule,
+  InputModule,
+  NFormsModule,
+  LoadingModule,
+  TilesModule,
+  DropdownModule,
+  NotificationModule,
+  ModalModule,
+  PlaceholderModule,
+  StaticIconModule
+} from "carbon-components-angular";
+
+import '@swimlane/ngx-datatable/release/index.css';
+import '@swimlane/ngx-datatable/release/themes/material.css';
+import '@swimlane/ngx-datatable/release/assets/icons.css';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'videos', pathMatch: 'full' },
@@ -47,7 +69,6 @@ const appRoutes: Routes = [
     AppComponent,
     VideoGridComponent,
     LoginFormComponent,
-    VideoSingleComponent,
     VideoDetailComponent,
     AdminPortalComponent,
     VideoManagementComponent,
@@ -63,7 +84,26 @@ const appRoutes: Routes = [
     ),
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxDatatableModule,
+    TabsModule,
+    IconModule,
+    ButtonModule,
+    TableModule,
+    HttpClientModule,
+    PaginationModule,
+    InputModule,
+    NFormsModule,
+    FormsModule,
+    LoadingModule,
+    HttpClientModule,
+    TilesModule,
+    DropdownModule,
+    NotificationModule,
+    ModalModule,
+    PlaceholderModule,
+    StaticIconModule,
+    StoreModule
   ],
   exports: [RouterModule],
   providers: [
