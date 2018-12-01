@@ -3,9 +3,12 @@ import { CookieService } from 'ngx-cookie-service';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { VideoService } from './video.service';
+import { AuthService } from './auth.service';
 import { Video } from './models/video';
-import { routerNgProbeToken } from '@angular/router/src/router_module';
 import { Router } from '@angular/router';
+import {Store} from "@ngrx/store";
+import {Log} from "./models/log";
+
 
 @Component({
   selector: 'app-root',
@@ -15,22 +18,30 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'video-store';
   cookieValue: string;
-  search: string = "";
   searchChangeObserver;
   videoSuggestions: Video[];
   chosenSuggestion: string;
   videos: Video[];
   chosenVideo: Video;
+  logged_in : boolean;
+  logged: Observable<Log>
   
   constructor(
     private cookieService: CookieService,
     private videoService: VideoService,
-    private router: Router) {}
+    private authService: AuthService,
+    private router: Router,
+    private store: Store<Log>
+  ) {}
 
   ngOnInit(): void {
-    this.cookieValue = 'UNKNOWN';
+    this.cookieValue = '';
     this.cookieValue = this.cookieService.get('auth_token');
-    console.log(this.cookieValue);
+    // console.log(this.cookieValue);
+    // Globals.checkLogin().subscribe(d => this.logged_in = d);
+
+    this.logged = this.store.select("auth");
+    this.logged.subscribe(data => this.logged_in = data.authorized);
 
     if (isDevMode()) console.log('👋 Development!');
     else console.log('💪 Production!');
@@ -64,4 +75,10 @@ export class AppComponent implements OnInit {
     this.chosenVideo =  this.videoSuggestions.find(video => video.title === title);
     console.log(this.chosenVideo["_id"]);
   }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigateByUrl("/videos");
+  }
+
 }

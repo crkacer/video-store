@@ -1,37 +1,23 @@
-<div class="clr-row" id="video-wrapper">
-  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12">
-      <div class="card-img " id="video-img">
-          <img class="single-img" [src]="video.image" alt="">
-      </div>
-  </div>
-  <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
-      <form>
-          <section class="form-block">
-      <h2>{{ video.title }}</h2>
-      <h3>By <a href="#">{{ video.director }}</a> - Thu Sep 14 2017 </h3>
-      <h4>Running Time: {{ video.length }} minutes</h4>
-      <h4>Genre: {{ video.genre }}</h4>
-      
-          <div class="select col-xl-8 col-lg-8 col-md-8">
-              <select id="aForm_3">
-                  <option value="0" selected disabled>Customer</option>
-                  <option>Option 1</option>
-                  <option>Option 2</option>
-                  <option>Option 3</option>
-                  <option>Option 4</option>
-              </select>
-          </div>
-      <img src="assets/img/star.svg" alt="Logo" class="logo-img star">
-      <img src="assets/img/star.svg" alt="Logo" class="logo-img star">
-      <img src="assets/img/star.svg" alt="Logo" class="logo-img star">
-      <img src="assets/img/star.svg" alt="Logo" class="logo-img star">
-      <img src="assets/img/star.svg" alt="Logo" class="logo-img star">
-      
-      <blockquote>{{ video.description }}</blockquote>
 
-      <button type="button" class="btn" routerLink="/videos">Cancel</button>
-      <button type="button" class="btn btn-primary">Reserve</button>
-      </section>
-      </form>
-  </div>
-</div>
+<div class="row">
+        <div class="medium-6 columns" >
+            <img class="thumbnail" src="{{ video?.image }}" style="max-height: 500px;">
+            
+        </div>
+        <div class="medium-7 large-6 columns">
+            <h2>{{ video?.title }}</h2><br>
+            <p>{{ video?.description }}</p><br>
+            <h3>By <a href="#">{{ video?.director }}</a> </h3><br>
+            <h4>Length: {{ video?.length }} minutes</h4>
+            <h4>Genre: {{ video?.genre }}</h4><br>
+            <label for=""><h3>Customer:</h3>
+            <select  [(ngModel)]="userID" [disabled]="video?.status !== 'Available'">
+                <option value="0" selected disabled value="">Customer</option>
+                <option *ngFor="let user of activeUsers" value="{{ user._id }}">{{ user?.firstname + " " + user?.lastname }}</option>
+            </select></label>
+            <button routerLink="/" class="button large">Cancel</button>
+            <button *ngIf="video?.status === 'Available'" (click)="reserveVideo($event)" class="button large">Reserve</button>
+            <button *ngIf="video?.status !== 'Available'" class="button large secondary">Occupied</button>
+            
+        </div>
+    </div>

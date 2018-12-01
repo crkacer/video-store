@@ -1,19 +1,19 @@
-<div class="clr-row" id="video-wrapper">
+<div class="clr-row" id="video-wrapper" style="position: relative">
     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12" >
         <div class="card-img col-md-4 col-sm-12 " id="video-img" >
-            <img src="{{ video?.image }}" alt="" style="margin-left: 2%; margin-top: 2%;"><br>
+            <img src="{{ video?.image }}" alt="" style="max-height: 400px; width: auto;"><br>
             <input type="file" 
             (change)="fileChange($event)"
             placeholder="Upload file" accept=".png,.jpg"    
             >
         </div>
     </div>
-    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12" style="margin-top: 100px;">
+    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12" style="margin-top: 25px;">
  
         <section class="form-block">
         <h4>Title</h4><input type="text" [ngModel]="video?.title" (ngModelChange)="video.title = $event" placeholder="Title" >
         <h4>By</h4> <input type="text" [ngModel]="video?.director" (ngModelChange)="video.director = $event" placeholder="Director" >
-        <h4>Length </h4> <input type="text" placeholder="minutes" [ngModel]="video?.length" (ngModelChange)="video.length = $event">
+        <h4>Length </h4> <input type="number" placeholder="minutes" [ngModel]="video?.length" (ngModelChange)="video.length = $event">
         <h4>Genre </h4>
         <select [ngModel]="video?.genre" (ngModelChange)="video.genre = $event">
             <option value="" disabled>Choose Genre</option>
@@ -42,6 +42,11 @@
         <blockquote>
           <input type="text" [ngModel]="video?.description" (ngModelChange)="video.description = $event" placeholder="Description" style="width: 100%">
         </blockquote>
+
+        <div *ngIf="!formValid()" class="callout warning">
+            <h4>All * fields are required!</h4>
+        </div>
+
         <button type="button" class="button large" routerLink="/portal/video-management">Cancel</button>
         <button type="button" class="button large" (click)="updateVideo($event,video._id)">Update</button>
         </section>

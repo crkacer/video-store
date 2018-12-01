@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+
+#video-img {
+    margin-right: 5%;
+    background-size: contain;
+}
+
+#video-wrapper {
+    
+}
+
+.card-img {
+    width: 300px;
+    height: 400px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.card-img-single {
+    min-width: 200px;
+    min-height: 400px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+

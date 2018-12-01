@@ -31,8 +31,7 @@ export class UserService {
         private cookieService: CookieService) {
 
         this.handleError = httpErrorHandler.createHandleError('UserService');
-        console.log(environment.API);
-        const token = this.cookieService.get("auth-token");
+        const token = this.cookieService.get("auth_token");
         this.httpOptionsWithToken = {
             headers: new HttpHeaders({
               'Authorization': 'Bearer ' + token,

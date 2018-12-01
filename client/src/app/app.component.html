@@ -47,10 +47,13 @@
                 <ul class="dropdown menu" data-dropdown-menu>
                     <li class="menu-text">Will's Video Store</li>
                     <li><a routerLinkActive="active" routerLink="/videos" >Video Store</a></li>  
-                    <li><a routerLinkActive="active" routerLink="/login"  *ngIf="cookieValue == ''">Login</a></li>
-                    <li class="has-submenu">
-                        <a routerLinkActive="active" routerLink="/portal/video-management"  *ngIf="cookieValue != ''" >Admin Portal</a>
 
+                    <li><a routerLinkActive="active" routerLink="/login"  *ngIf="logged_in == false">Login</a></li>
+                    <li class="has-submenu">
+                        <a routerLinkActive="active" routerLink="/portal/video-management"  *ngIf="logged_in == true" >Admin Portal</a>
+                    </li>
+                    <li class="has-submenu">
+                        <a  (click)="logout()" *ngIf="logged_in == true" >Logout</a>
                     </li>
                 </ul>
             </div>

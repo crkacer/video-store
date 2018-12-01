@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.route('/')
   /** POST /api/user - Create new user */
-  .post(validate(paramValidation.createUser), userCtrl.create);
+  .post(expressJwt({ secret: config.jwtSecret }), validate(paramValidation.createUser), userCtrl.create);
 
 router.route('/list')
   /** GET /api/user/list - Get list of users */
@@ -21,13 +21,13 @@ router.route('/list-available')
 
 router.route('/:userId')
   /** GET /api/user/:userId - Get user */
-  .get(userCtrl.get)
+  .get(expressJwt({ secret: config.jwtSecret }), userCtrl.get)
 
   /** PUT /api/user/:userId - Update user */
   .put(expressJwt({ secret: config.jwtSecret }),validate(paramValidation.updateUser), userCtrl.update)
 
   /** DELETE /api/user/:userId - Delete user */
-  .delete(userCtrl.remove);
+  .delete(expressJwt({ secret: config.jwtSecret }), userCtrl.remove);
 
 
 module.exports = router;

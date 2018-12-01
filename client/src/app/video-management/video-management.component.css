@@ -1,0 +1,11 @@
+.bx--btn--primary {
+    background-color: #3d70b2;
+    border-width: 2px;
+    border-style: solid;
+    border-color: transparent;
+    color: #fff;
+  }
+  
+  .bx--data-table-v2 .bx--checkbox-label {
+    display: none;
+  }

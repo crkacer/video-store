@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { VideoGridComponent } from './video-grid/video-grid.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { VideoDetailComponent } from './video-detail/video-detail.component';
-import {LoginService} from '../app/login-form/login-form.service';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpErrorHandler }     from './http-error-handler.service';
@@ -20,6 +19,7 @@ import { FormsModule } from '@angular/forms';
 import { UserCreationComponent } from './user-creation/user-creation.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserService } from './user.service';
+import { AuthService } from './auth.service';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import StoreModule from './store/store'
 
@@ -108,11 +108,11 @@ const appRoutes: Routes = [
   exports: [RouterModule],
   providers: [
     CookieService,
-    LoginService,
     HttpErrorHandler,
     MessageService,
     VideoService,
-    UserService
+    UserService,
+    AuthService
   ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

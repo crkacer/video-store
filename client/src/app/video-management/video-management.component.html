@@ -30,22 +30,26 @@
 </table> -->
 
 <div>
-    <input
-        type='text'
-        style='padding:8px;margin:15px auto;width:30%;'
-        placeholder='Type to filter the name column...'
-        (keyup)='updateFilter($event)'
-    />
-    <ngx-datatable
-        #table
-        class='material'
-        [rows]='rows'
-        [columns]="columns"
-        [columnMode]="'force'"
-        [headerHeight]="50"
-        [footerHeight]="50"
-        [rowHeight]="'auto'"
-        [limit]="2"
-        >
-    </ngx-datatable>
+      <div class="table-header">
+        <div class="input-filter-wrapper">
+          <input class="input-filter" type="text" (keyup)="updateFilter($event);" placeholder="Search" />
+        </div>
+        <div class="add-video-btn">
+          <button type="button" class="bx--btn bx--btn--primary" style="background-color: #2199e8" routerLink="/portal/video-create">Add New Video</button>
+        </div>
+      </div>
+      <ibm-placeholder></ibm-placeholder>
+      <ibm-table *ngIf="!loading" [model]="videoTable" (sort)="customSort($event)" (filter)="updateFilter($event)" [showSelectionColumn]="true"
+                  [striped]="true"></ibm-table>
+      <ibm-pagination *ngIf="!loading" [model]="videoTable" (selectPage)="selectPage($event)"></ibm-pagination>
+      
+      <ibm-loading *ngIf="loading">Loading...</ibm-loading>
+
+      <ng-template #UpdateTemplateRef  let-data="data">
+        <button type="button" class="bx--btn bx--btn--primary" style="background-color: #2199e8" (click)="handleUpdate(data);">Update</button>
+      </ng-template>
+      <ng-template #DeleteTemplateRef let-data="data">
+        <button type="button" class="bx--btn bx--btn--danger" (click)="handleDelete(data);">Delete</button>
+      </ng-template>
+
 </div>

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {LoginService} from './login-form.service';
-import {User} from '../models/user';
+import {AuthService} from '../auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import {Auth} from '../models/auth';
 import { Router } from '@angular/router';
+import { Store } from "@ngrx/store";
+import {Log} from '../models/log';
+import {LOGGED_IN} from "../store/auth";
 
 @Component({
   selector: 'login-form',
@@ -14,11 +16,13 @@ export class LoginFormComponent implements OnInit {
 
   userLogin: Auth;
   loginError: Boolean = false;
-  cookieValue: string;
+  expiredDate: Date;
   constructor(
-    private loginService: LoginService,
+    private authService: AuthService,
     private cookieService: CookieService,
-    private router: Router) { }
+    private router: Router,
+    private store: Store<Log>
+  ) { }
   
   ngOnInit() {
   }
@@ -26,11 +30,11 @@ export class LoginFormComponent implements OnInit {
   login(username: string, password: string) {
     this.userLogin = {username, password};
     if (this.userLogin) {
-      this.loginService.login(this.userLogin)
+      this.authService.login(this.userLogin)
         .subscribe(authData => {
           this.loginError = false;
           this.setCookie(authData.username, authData.token);
-          window.location.reload();
+          this.store.dispatch({type: LOGGED_IN});
           this.router.navigateByUrl('/portal/video-management');
 
         });
@@ -40,8 +44,13 @@ export class LoginFormComponent implements OnInit {
   }
 
   setCookie(name: string, value: string) {
-    this.cookieService.set("auth_name", name);
-    this.cookieService.set("auth_token", value);
+
+    this.expiredDate = new Date();
+    this.expiredDate.setDate( this.expiredDate.getDate() + 2 );
+
+    this.cookieService.deleteAll();
+    this.cookieService.set("auth_name", name, this.expiredDate);
+    this.cookieService.set("auth_token", value, this.expiredDate);
   }
 
 }

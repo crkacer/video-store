@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import {Router} from '@angular/router';
 
+
 @Component({
   selector: 'app-admin-portal',
   templateUrl: './admin-portal.component.html',
@@ -15,7 +16,7 @@ export class AdminPortalComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.cookieValue = 'UNKNOWN';
+    this.cookieValue = '';
     this.cookieValue = this.cookieService.get('auth_token');
 
     if (this.cookieValue == '') {

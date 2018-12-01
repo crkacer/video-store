@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { VideoService } from '../video.service';
 import { Video } from '../models/video';
+import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from '../../environments/environment';
 
 @Component({
@@ -22,10 +23,16 @@ export class VideoCreationComponent implements OnInit {
   };
 
   constructor(
-    private videoService: VideoService
+    private videoService: VideoService,
+    private router: Router
   ) { }
 
   ngOnInit() {
+  }
+
+  formValid() {
+    return (this.video.title != '' && this.video.image != '' && this.video.genre != '' && this.video.director != ''
+      && this.video.status != '' && this.video.description != '' && this.video.length != 0);
   }
 
   fileChange(event) {
@@ -50,13 +57,16 @@ export class VideoCreationComponent implements OnInit {
   createVideo(event) {
     this.video.star = this.video.star.toString();
     console.log(this.video);
-    this.videoService.postCreateVideo(this.video)
-      .subscribe(
-        data => {
-          console.log(data);
-        },
-        error => console.log(error)
-    );
+    if (this.formValid())
+      this.videoService.postCreateVideo(this.video)
+        .subscribe(
+            data => {
+              console.log(data);
+              alert("Create Successfully!");
+              this.router.navigateByUrl('/portal/video-management');
+            },
+            error => alert("Failed to create!")
+      );
   }
 
 }

@@ -1,30 +1,31 @@
 <div class="clr-row" id="video-wrapper">
     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12">
+        <h4>Image *:</h4>
         <div class="card-img " id="video-img">
-            <img class="single-img " src="{{ video.image }}" alt="">
+            <img class="single-img " src="{{ video.image }}" alt="" style="max-height: 400px; width: auto;">
             <input type="file" 
             (change)="fileChange($event)"
             placeholder="Upload file" accept=".png,.jpg"   
             >
         </div>
     </div>
-    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
+    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12" style="margin-top: 25px;">
  
         <section class="form-block">
-        <h4>Title</h4><input type="text" value="" placeholder="Title" 
+        <h4>Title *:</h4><input type="text" value="" placeholder="Title"
             [ngModelOptions]="{standalone: true}" 
             [(ngModel)]="video.title" 
             >
-        <h4>By</h4> <input type="text" value="" placeholder="Director"
+        <h4>By *:</h4> <input type="text" value="" placeholder="Director"
             [ngModelOptions]="{standalone: true}" 
             [(ngModel)]="video.director" 
             > 
-        <h4>Length</h4> <input type="text" value="" placeholder="minutes"
+        <h4>Length *:</h4> <input type="number" value="" placeholder="minutes"
             [ngModelOptions]="{standalone: true}" 
             [(ngModel)]="video.length" 
             >
 
-        <h4>Genre </h4>
+        <h4>Genre *: </h4>
         <select [(ngModel)]="video.genre" [ngModelOptions]="{standalone: true}" >
             <option value="" disabled>Choose Genre</option>
             <option value="Action">Action</option>
@@ -33,7 +34,7 @@
             <option value="Romantic">Romantic</option>
         </select>
         <br>
-        <h4>Star</h4>
+        <h4>Star *:</h4>
         <select [(ngModel)]="video.star" [ngModelOptions]="{standalone: true}" >
             <option value="" disabled>Choose Star</option>
             <option value="1">1</option>
@@ -42,20 +43,25 @@
             <option value="4">4</option>
             <option value="5">5</option>
         </select>
-        <h4>Status</h4>
+        <h4>Status *:</h4>
         <select [(ngModel)]="video.status" [ngModelOptions]="{standalone: true}" >
             <option value="" disabled>Choose Status</option>
             <option value="Available">Available</option>
             <option value="Unavailable">Unavailable</option>
         </select>
 
-        <h4>Description</h4>
+        <h4>Description *:</h4>
         <blockquote>
           <input type="text" value="" placeholder="Description" style="width: 100%"
             [ngModelOptions]="{standalone: true}" 
             [(ngModel)]="video.description" 
           >
         </blockquote>
+
+        <div *ngIf="!formValid()" class="callout warning">
+            <h4>All * fields are required!</h4>
+        </div>
+
         <button type="button" class="button large" routerLink="/portal/video-management">Cancel</button>
         <button type="button" class="button large" (click)="createVideo($event)">Create</button>
         </section>

@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.route('/')
     /** POST /api/video */
-    .post(validate(paramValidation.createVideo), videoCtrl.create);
+    .post(expressJwt({ secret: config.jwtSecret }), validate(paramValidation.createVideo), videoCtrl.create);
     
 router.route('/list')
     /** GET /api/video/list */
@@ -27,7 +27,7 @@ router.route('/upload-image')
 
 router.route('/reserve')
     /** POST /api/video/reserve -- Reserve video */
-    .post(expressJwt({ secret: config.jwtSecret }), validate(paramValidation.reserveVideo), videoCtrl.reserve);
+    .post(validate(paramValidation.reserveVideo), videoCtrl.reserve);
 
 router.route('/:id')
     /** GET /api/video/:id */

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, UrlSegment } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { VideoService} from '../video.service';
 import { Video } from '../models/video';
 import {environment} from '../../environments/environment';
@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 })
 export class VideoEditComponent implements OnInit {
 
-  video: Video;
+  video?: Video;
   videoID: String;
   status: string;
 
@@ -29,7 +29,7 @@ export class VideoEditComponent implements OnInit {
 
     this.videoService.getVideoById(this.videoID)
       .subscribe(video => { 
-        this.video = video; 
+        this.video = video;
         if (video.status !== 'Available') this.status = 'Unavailable';
         else this.status = 'Available';
       });
@@ -54,17 +54,24 @@ export class VideoEditComponent implements OnInit {
     }
   }
 
+    formValid() {
+        return (this.video.title != '' && this.video.image != '' && this.video.genre != '' && this.video.director != ''
+        && this.video.status != '' && this.video.description != '' && this.video.length != 0);
+    }
+
   updateVideo(event, id) {
     this.video.star = this.video.star.toString();
     this.video.status = this.status;
-    this.videoService.putUpdateVideo(id, this.video)
-      .subscribe(
-        data => {
-          console.log(data);
-          window.location.reload();
-        },
-        error => console.log(error)
-    );
+    if (this.formValid())
+        this.videoService.putUpdateVideo(id, this.video)
+          .subscribe(
+            data => {
+                console.log(data);
+                alert("Update Successfully!");
+                this.router.navigateByUrl('/portal/video-management');
+            },
+            error => alert("Failed to update!")
+        );
   }
 
 }

@@ -29,15 +29,14 @@ export class VideoService {
         private cookieService: CookieService) {
 
         this.handleError = httpErrorHandler.createHandleError('VideoGridService');
-        console.log(environment.API);
         const token = this.cookieService.get("auth_token");
-        console.log(token);
         this.httpOptionsWithToken = {
             headers: new HttpHeaders({
               'Authorization': 'Bearer ' + token,
               'Accept': 'application/json'
             })
           };
+        httpOptions = this.httpOptionsWithToken;
       }
     
 
@@ -56,6 +55,7 @@ export class VideoService {
     }
 
     putUpdateVideo(id: String, video: Video ):Observable<Object> {
+        console.log(this.token);
         return this.http.put(this.rootURL+this.videoURI+id, video, this.httpOptionsWithToken);
     }
 
@@ -73,7 +73,7 @@ export class VideoService {
 
     postReserveVideo(videoID: String, userID: String):Observable<any> {
         const reserve = {videoID: videoID, userID: userID};
-        return this.http.post(this.rootURL+this.videoURI+"reserve", reserve, this.httpOptionsWithToken);
+        return this.http.post(this.rootURL+this.videoURI+"reserve", reserve, httpOptions);
     }
 
 }

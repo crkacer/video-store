@@ -1,3 +1,46 @@
-<p>
-  user-edit works!
-</p>
+<div class="clr-row" id="video-wrapper">
+
+  <div class=" col-sm-12 col-xs-12">
+
+      <section class="form-block">
+
+          <h4>First Name *: <input type="text" value="" style="width: 100%"
+                                   [ngModelOptions]="{standalone: true}"
+                                   [(ngModel)]="user.firstname"
+          > </h4>
+          <h4>Last Name *: <input type="text" value="" style="width: 100%"
+                                  [ngModelOptions]="{standalone: true}"
+                                  [(ngModel)]="user.lastname"
+          ></h4>
+          <h4>Address *: <input type="text" value="" style="width: 100%"
+                                [ngModelOptions]="{standalone: true}"
+                                [(ngModel)]="user.address"
+          > </h4>
+          <h4>City *: <input type="text" value="" style="width: 100%"
+                             [ngModelOptions]="{standalone: true}"
+                             [(ngModel)]="user.city"
+          > </h4>
+
+          <h4>Status *:</h4>
+          <select [(ngModel)]="user.status" [ngModelOptions]="{standalone: true}" >
+              <option value="" disabled>Choose Status</option>
+              <option value="Active">Active</option>
+              <option value="Expired">Expired</option>
+          </select>
+
+          <h4>Mobile Number *: <input type="text" value="" style="width: 100%"
+                                      [ngModelOptions]="{standalone: true}"
+                                      [(ngModel)]="user.mobileNumber"
+          > </h4>
+          <br>
+
+          <div *ngIf="!formValid()" class="callout warning">
+              <h4>All * fields are required!</h4>
+          </div>
+
+          <button type="button" class="button large" routerLink="/portal/user-management">Cancel</button>
+          <button type="button" class="button large" (click)="updateUser($event, user._id)">Create</button>
+
+      </section>
+  </div>
+</div>

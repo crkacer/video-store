@@ -1,20 +1,53 @@
-<table class="table">
-    <thead>
-        <tr>
-            <th></th>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Email</th>
-            <th>Created At</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of [1,2,3,4,5,6]">
-            <td></td>
-            <td>John</td>
-            <td>Doe</td>
-            <td>john.doe@gmail.com</td>
-            <td></td>
-        </tr>
-    </tbody>
-  </table>
+<!--<table class="table">-->
+    <!--<thead>-->
+        <!--<tr>-->
+            <!--<th></th>-->
+            <!--<th>Firstname</th>-->
+            <!--<th>Lastname</th>-->
+            <!--<th>Address</th>-->
+            <!--<th>City</th>-->
+            <!--<th>Status</th>-->
+            <!--<th>Mobile Number</th>-->
+            <!--<th>Edit</th>-->
+            <!--<th>Delete</th>-->
+        <!--</tr>-->
+    <!--</thead>-->
+    <!--<tbody>-->
+        <!--<tr *ngFor="let user of users">-->
+            <!--<td></td>-->
+            <!--<td>{{ user.firstname }}</td>-->
+            <!--<td>{{ user.lastname }}</td>-->
+            <!--<td>{{ user.address }}</td>-->
+            <!--<td>{{ user.city }}</td>-->
+            <!--<td>{{ user.status }}</td>-->
+            <!--<td>{{ user.mobileNumber }}</td>-->
+            <!--<td><button type="button" class="btn btn-primary" routerLink="/portal/user-edit/{{user._id}}">Edit</button></td>-->
+            <!--<td><button type="button" class="btn btn-danger" (click)="deleteUser(user._id)">Delete</button></td>-->
+        <!--</tr>-->
+    <!--</tbody>-->
+  <!--</table>-->
+
+<div>
+    <div class="table-header">
+        <div class="input-filter-wrapper">
+            <input class="input-filter" type="text" (keyup)="updateFilter($event);" placeholder="Search" />
+        </div>
+        <div class="add-video-btn">
+            <button type="button" class="bx--btn bx--btn--primary" style="background-color: #2199e8" routerLink="/portal/user-create">Add New User</button>
+        </div>
+    </div>
+    <ibm-placeholder></ibm-placeholder>
+    <ibm-table *ngIf="!loading" [model]="userTable" (sort)="customSort($event)" (filter)="updateFilter($event)" [showSelectionColumn]="true"
+               [striped]="true"></ibm-table>
+    <ibm-pagination *ngIf="!loading" [model]="userTable" (selectPage)="selectPage($event)"></ibm-pagination>
+
+    <ibm-loading *ngIf="loading">Loading...</ibm-loading>
+
+    <ng-template #UpdateTemplateRef  let-data="data">
+        <button type="button" class="bx--btn bx--btn--primary" style="background-color: #2199e8" (click)="updateUser(data);">Update</button>
+    </ng-template>
+    <ng-template #DeleteTemplateRef let-data="data">
+        <button type="button" class="bx--btn bx--btn--danger" (click)="deleteUser(data);">Delete</button>
+    </ng-template>
+
+</div>
