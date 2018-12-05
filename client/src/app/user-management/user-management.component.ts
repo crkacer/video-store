@@ -115,14 +115,13 @@ export class UserManagementComponent implements OnInit {
     model.sort(index);
   }
   getPage(page: number) {
-    const line = data => data && data.map(column => {
+    const row = data => data && data.map(column => {
       return { data: column.data, template: column.template };
     })
 
     const fullPage = [];
-
     for (let i = (page - 1) * this.userTable.pageLength; (i < page * this.userTable.pageLength && i < this.userTable.totalDataLength); i++) {
-      fullPage.push(line(this.userTable.data[i]));
+      fullPage.push(row(this.generateContent(this.userData.users)[i]));
     }
 
     return new Promise(resolve =>

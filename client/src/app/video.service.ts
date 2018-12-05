@@ -7,7 +7,7 @@ import { Video } from "./models/video";
 import { environment } from '../environments/environment';
 import { CookieService } from "ngx-cookie-service";
 
-const httpOptions = {
+let httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json'
     })

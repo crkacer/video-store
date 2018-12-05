@@ -43,13 +43,13 @@ export class VideoDetailComponent implements OnInit {
   reserveVideo(event) {
     if (this.userID && this.videoID) {
       this.videoService.postReserveVideo(this.videoID, this.userID)
-      .subscribe(
-        res => {
-          alert("Reserve Successfully!");
-          this.router.navigateByUrl("/videos");
-        },
-        err => alert("Failed to reserve!");
-      );
+        .subscribe(
+          res => {
+            alert("Reserve Successfully!");
+            this.router.navigateByUrl("/videos");
+          },
+          err => alert("Failed to reserve!")
+        );
 
     }
       

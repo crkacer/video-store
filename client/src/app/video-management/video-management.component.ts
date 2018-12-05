@@ -113,14 +113,13 @@ export class VideoManagementComponent implements OnInit {
     model.sort(index);
   }
   getPage(page: number) {
-    const line = data => data && data.map(column => {
+    const row = data => data && data.map(column => {
         return { data: column.data, template: column.template };
       })
   
     const fullPage = [];
-
     for (let i = (page - 1) * this.videoTable.pageLength; (i < page * this.videoTable.pageLength && i < this.videoTable.totalDataLength); i++) {
-      fullPage.push(line(this.videoTable.data[i]));
+      fullPage.push(row(this.generateContent(this.videoData.videos)[i]));
     }
 
     return new Promise(resolve =>
